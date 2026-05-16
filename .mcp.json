@@ -1,0 +1,33 @@
+{
+  "inputs": [
+    {
+      "id": "api_token",
+      "type": "promptString",
+      "description": "Enter your Hostinger API token (required)"
+    }
+  ],
+  "servers": {
+    "hostinger-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "hostinger-api-mcp@latest"
+      ],
+      "env": {
+        "API_TOKEN": "fLT29B5wTcB8VLNu5HYz6RXaaJZFbCS6jFdmcb9H8172b56e"
+      }
+    },
+    "coolify": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@masonator/coolify-mcp"
+      ],
+      "env": {
+        "COOLIFY_BASE_URL": "http://82.112.238.62:8000",
+        "COOLIFY_ACCESS_TOKEN": "4|yjGticZNBhYGnzElvl7pIrKcCVpYePXnjk1G77zn8b0060ef"
+      }
+    }
+  }
+}
