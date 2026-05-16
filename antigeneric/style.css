@@ -1,0 +1,121 @@
+/*
+Theme Name: Antigeneric
+Theme URI: https://antigen.com/
+Author: ANTIGEN
+Author URI: https://antigen.com/
+Description: Antigeneric is a manifesto-first WordPress block theme built from the ANTIGEN design system. Red/magenta manifesto territories, white evidence spreads, brutal uppercase display typography, and confrontational editorial layouts. Anti-sameness. Anti-stagnation.
+Requires at least: 6.8
+Tested up to: 6.8
+Requires PHP: 7.2
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: antigeneric
+Tags: full-site-editing, block-styles, wide-blocks, custom-colors, custom-logo, editor-style, translation-ready, blog, portfolio
+*/
+
+/* Progressive text wrapping */
+h1, h2, h3, h4, h5, h6, blockquote, caption, figcaption {
+	text-wrap: balance;
+}
+p {
+	text-wrap: pretty;
+}
+
+/* Base link sharpness */
+a {
+	text-decoration-thickness: 0.0625em !important;
+	text-underline-offset: 0.15em;
+}
+
+/* Text selection — yellow on black */
+::-moz-selection { background: #FFC000; color: #111111; }
+::selection      { background: #FFC000; color: #111111; }
+
+/* ── Buttons ──────────────────────────────────────── */
+.wp-block-button__link,
+.wp-element-button {
+	border-radius: 0 !important;
+	letter-spacing: 0.08em;
+	font-weight: 900;
+}
+
+.wp-block-button.is-style-outline > .wp-block-button__link:not(.has-background):hover {
+	background-color: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--base);
+	border-color: var(--wp--preset--color--primary);
+}
+
+/* ── Navigation ───────────────────────────────────── */
+.wp-block-navigation .wp-block-navigation-item__label {
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	font-weight: 800;
+}
+
+/* ── Post titles ──────────────────────────────────── */
+.wp-block-post-title {
+	text-transform: uppercase;
+}
+
+/* ── Separator — red rule ─────────────────────────── */
+.wp-block-separator {
+	border-color: var(--wp--preset--color--primary) !important;
+}
+
+/* ── Custom block styles ──────────────────────────── */
+
+/* Force card: red top border */
+.wp-block-group.is-style-force-card {
+	border-top: 6px solid var(--wp--preset--color--primary);
+	padding-top: 1.5rem;
+}
+
+/* Evidence block: red left accent */
+.wp-block-group.is-style-evidence-block {
+	border-left: 6px solid var(--wp--preset--color--primary);
+	padding-left: 2rem;
+}
+
+/* Torn signal: yellow clipped shape */
+.wp-block-group.is-style-torn-signal {
+	background-color: var(--wp--preset--color--yellow);
+	clip-path: polygon(4% 0, 100% 8%, 94% 100%, 0 91%, 7% 52%);
+}
+
+/* ── Query / archive typography ───────────────────── */
+.wp-block-query-title {
+	text-transform: uppercase;
+	letter-spacing: -0.03em;
+}
+
+/* ── Pullquote ────────────────────────────────────── */
+.wp-block-pullquote blockquote {
+	border: none;
+}
+
+/* ── Cover block — insurgence style ──────────────── */
+.wp-block-cover.is-style-insurgence {
+	background: linear-gradient(135deg, #E31D28 0%, #E3195B 72%, #F0448E 100%) !important;
+}
+
+/* ── Section nav dots ─────────────────────────────── */
+.antigeneric-section-nav {
+	display: flex;
+	gap: 1.2rem;
+	font-family: var(--wp--preset--font-family--montserrat);
+	font-size: var(--wp--preset--font-size--micro);
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+.antigeneric-section-nav .current {
+	color: var(--wp--preset--color--yellow);
+}
+
+/* ── Responsive helpers ───────────────────────────── */
+@media (max-width: 768px) {
+	.wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column {
+		flex-basis: 100% !important;
+	}
+}
