@@ -79,11 +79,14 @@ a{color:inherit;text-decoration-thickness:.08em;text-underline-offset:.18em;}
   backdrop-filter:blur(12px);
 }
 .nav-logo{
-  font-family:var(--font-display);
-  font-size:1.8rem;
-  letter-spacing:.04em;
-  color:var(--color-white);
+  display:flex;
+  align-items:center;
   text-decoration:none;
+}
+.nav-logo img{
+  height:36px;
+  width:auto;
+  display:block;
 }
 .nav-links{
   display:flex;gap:var(--space-6);list-style:none;
@@ -491,85 +494,129 @@ section{position:relative;}
   position:relative;
 }
 #who .hero-grid-bg{opacity:.4;}
-.who-stack-headline{
+.who-statement{
   font-family:var(--font-display);
   font-size:var(--type-display);
-  line-height:.8;
-  letter-spacing:-.03em;
+  line-height:.85;
+  letter-spacing:-.02em;
   text-transform:uppercase;
   margin-bottom:var(--space-7);
+  max-width:900px;
 }
-.who-stack-headline .ghost{
-  -webkit-text-stroke:1.5px rgba(255,255,255,.3);
-  color:transparent;
-  display:block;
-}
-.who-stack-headline .solid{display:block;}
 
-/* Human side */
-.who-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(1.5rem,4vw,5rem);
-  margin-bottom:var(--space-8);
+/* Stack tabs */
+.stack-tabs{
+  display:flex;
+  gap:0;
+  margin-bottom:var(--space-6);
+  border:1px solid rgba(255,255,255,.2);
+  width:fit-content;
 }
-.who-col-header{
+.stack-tab{
+  font-family:var(--font-sans);
   font-size:var(--type-micro);
   font-weight:800;
-  letter-spacing:.12em;
+  letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--color-yellow);
-  margin-bottom:var(--space-5);
-  padding-bottom:var(--space-3);
-  border-bottom:1px solid rgba(255,255,255,.15);
-  display:flex;align-items:center;gap:.6rem;
+  background:transparent;
+  color:rgba(255,255,255,.45);
+  border:none;
+  padding:.75rem 1.8rem;
+  cursor:pointer;
+  transition:background .2s,color .2s;
+  border-right:1px solid rgba(255,255,255,.2);
 }
-.who-col-header::before{
-  content:'';display:block;
-  width:1.8rem;height:1.5px;
+.stack-tab:last-child{border-right:none;}
+.stack-tab.active{
   background:var(--color-yellow);
+  color:var(--color-black);
 }
-.who-role-cards{display:flex;flex-direction:column;gap:var(--space-3);}
-.who-role-card{
-  background:rgba(255,255,255,.09);
+.stack-tab:not(.active):hover{
+  background:rgba(255,255,255,.08);
+  color:var(--color-white);
+}
+
+/* Stack panels */
+.stack-panel{display:flex;flex-direction:column;gap:var(--space-2);margin-bottom:var(--space-7);}
+.stack-panel.hidden{display:none;}
+
+/* Accordion cards */
+.accordion-card{
   border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.acc-header{
+  width:100%;
+  background:transparent;
+  border:none;
   padding:var(--space-4) var(--space-5);
-  backdrop-filter:blur(4px);
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:var(--space-4);
+  cursor:pointer;
+  text-align:left;
+  transition:background .2s;
 }
-.who-role-card:hover{background:rgba(255,255,255,.15);transition:background .2s;}
-.who-role-name{
+.acc-header:hover{background:rgba(255,255,255,.08);}
+.accordion-card.open .acc-header{background:rgba(255,255,255,.1);}
+.acc-tag{
+  font-size:.68rem;
   font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-  font-size:.88rem;
-  margin-bottom:.4rem;
-}
-.who-role-tag{
-  font-size:.7rem;
-  font-weight:700;
   letter-spacing:.1em;
   text-transform:uppercase;
   color:var(--color-yellow);
-  margin-bottom:.5rem;
+  white-space:nowrap;
 }
-.who-role-desc{
-  font-size:.85rem;
-  font-weight:500;
+.acc-name{
+  font-size:.92rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--color-white);
+}
+.acc-arrow{
+  font-size:1.4rem;
+  color:rgba(255,255,255,.4);
+  line-height:1;
+  transition:transform .25s;
+  font-weight:300;
+  user-select:none;
+}
+.accordion-card.open .acc-arrow{transform:rotate(45deg);color:var(--color-yellow);}
+.acc-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease;
+}
+.acc-body.open{max-height:200px;}
+.acc-body p{
+  padding:0 var(--space-5) var(--space-4);
+  font-size:.88rem;
   color:rgba(255,255,255,.65);
-  line-height:1.45;
+  line-height:1.55;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:var(--space-3);
 }
 
-/* AI engines */
-.who-engine{
-  background:rgba(0,0,0,.25);
-  border:1px solid rgba(255,255,255,.12);
-  padding:var(--space-4) var(--space-5);
-  margin-bottom:var(--space-3);
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:var(--space-4);
-  align-items:start;
+/* Quote box */
+.who-quote{
+  border:1px solid rgba(255,255,255,.15);
+  padding:var(--space-5) var(--space-6);
+  background:rgba(0,0,0,.3);
 }
+.who-quote p{
+  font-family:var(--font-display);
+  font-size:clamp(1.4rem,3vw,2.2rem);
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  color:rgba(255,255,255,.75);
+  line-height:1.1;
+}
+
+/* Equation kept for spacing — removed from HTML */
+.who-equation{display:none;}
 .who-engine-name{
   font-family:var(--font-display);
   font-size:clamp(1.8rem,3vw,2.8rem);
@@ -644,64 +691,100 @@ section{position:relative;}
   max-width:900px;
   margin-bottom:var(--space-7);
 }
-.ecosystem-grid{
+
+/* Paradigm shift table */
+.paradigm-table{
   display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
+  grid-template-columns:1fr auto 1fr;
   gap:0;
   border:var(--rule);
   margin-bottom:var(--space-9);
 }
-.ecosystem-card{
-  padding:var(--space-5) var(--space-4);
-  border-right:var(--rule);
-  position:relative;overflow:hidden;
-  transition:background .2s;
-}
-.ecosystem-card:last-child{border-right:0;}
-.ecosystem-card:hover{background:var(--color-black);}
-.ecosystem-card:hover .eco-title,
-.ecosystem-card:hover .eco-kicker,
-.ecosystem-card:hover .eco-desc{color:var(--color-white);}
-.ecosystem-card:hover .eco-num{color:rgba(255,255,255,.08);}
-.ecosystem-card:hover .eco-bar{background:var(--color-yellow);}
-.eco-bar{
-  height:3px;
-  background:var(--color-red);
-  margin-bottom:var(--space-5);
-  transition:background .2s;
-}
-.eco-num{
-  font-family:var(--font-display);
-  font-size:3.5rem;
-  line-height:.8;
-  letter-spacing:-.03em;
-  color:var(--color-smoke);
-  margin-bottom:var(--space-3);
-  transition:color .2s;
-}
-.eco-kicker{
+.paradigm-col{display:flex;flex-direction:column;}
+.paradigm-label{
   font-size:var(--type-micro);
   font-weight:800;
   letter-spacing:.1em;
   text-transform:uppercase;
-  color:var(--color-red);
-  margin-bottom:var(--space-2);
-  transition:color .2s;
+  padding:var(--space-4) var(--space-5);
+  border-bottom:var(--rule);
 }
-.eco-title{
+.paradigm-col.legacy .paradigm-label{color:var(--color-grey);}
+.paradigm-col.antigen .paradigm-label{color:var(--color-red);}
+.paradigm-row{
+  padding:var(--space-4) var(--space-5);
+  font-size:.9rem;
+  font-weight:500;
+  border-bottom:var(--rule);
+  line-height:1.4;
+}
+.paradigm-row:last-child{border-bottom:none;}
+.paradigm-col.legacy .paradigm-row{color:var(--color-grey);text-decoration:line-through;text-decoration-color:rgba(0,0,0,.2);}
+.paradigm-col.antigen .paradigm-row{color:var(--color-black);font-weight:700;}
+.paradigm-arrow-col{
+  display:flex;flex-direction:column;
+  border-left:var(--rule);border-right:var(--rule);
+}
+.paradigm-arrow-col .paradigm-label{color:transparent;border-bottom:var(--rule);}
+.paradigm-arrow{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.1rem;
+  color:var(--color-red);
+  border-bottom:var(--rule);
+  padding:0 var(--space-3);
+}
+.paradigm-arrow:last-child{border-bottom:none;}
+
+/* Ecosystem tabs */
+.eco-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  border:var(--rule);
+  margin-bottom:0;
+}
+.eco-tab{
+  font-family:var(--font-sans);
+  font-size:var(--type-micro);
   font-weight:800;
-  font-size:1rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  background:transparent;
+  color:var(--color-grey);
+  border:none;
+  border-right:var(--rule);
+  padding:.85rem 1.4rem;
+  cursor:pointer;
+  transition:background .2s,color .2s;
+  flex:1;
+}
+.eco-tab:last-child{border-right:none;}
+.eco-tab.active{background:var(--color-black);color:var(--color-yellow);}
+.eco-tab:not(.active):hover{background:var(--color-smoke);}
+.eco-panels{
+  border:var(--rule);
+  border-top:none;
+  margin-bottom:var(--space-9);
+}
+.eco-panel{
+  display:none;
+  padding:var(--space-6) var(--space-5);
+}
+.eco-panel.active{display:block;}
+.eco-panel-title{
+  font-weight:800;
+  font-size:1.1rem;
   text-transform:uppercase;
   letter-spacing:.04em;
-  margin-bottom:var(--space-3);
-  transition:color .2s;
+  margin-bottom:var(--space-2);
 }
-.eco-desc{
-  font-size:.82rem;
-  font-weight:500;
+.eco-panel-desc{
+  font-size:.92rem;
   color:var(--text-muted);
-  line-height:1.5;
-  transition:color .2s;
+  font-weight:500;
 }
 
 /* Service velocity */
@@ -1069,10 +1152,15 @@ section{position:relative;}
   .what-opener{grid-template-columns:1fr;}
   .comparison-strip{grid-template-columns:1fr;}
   .cell-model{grid-template-columns:1fr;}
-  .who-grid{grid-template-columns:1fr;}
   .velocity-section{grid-template-columns:1fr;}
   .velocity-tiers{grid-template-columns:1fr;}
-  .ecosystem-grid{grid-template-columns:repeat(2,1fr);}
+  .paradigm-table{grid-template-columns:1fr;}
+  .paradigm-arrow-col{display:none;}
+  .eco-tabs{flex-direction:column;}
+  .eco-tab{border-right:none;border-bottom:var(--rule);text-align:left;}
+  .eco-tab:last-child{border-bottom:none;}
+  .acc-header{grid-template-columns:1fr auto;gap:var(--space-2);}
+  .acc-tag{display:none;}
   .contact-grid{grid-template-columns:1fr;}
   .pov-grid{grid-template-columns:1fr;}
   .closing-bar{flex-direction:column;align-items:flex-start;}
@@ -1112,7 +1200,7 @@ section{position:relative;}
 
 <!-- ─── NAV ─────────────────────────────────────────────────────────── -->
 <nav class="site-nav" id="site-nav">
-  <a class="nav-logo" href="#home">ANTIGEN</a>
+  <a class="nav-logo" href="#home"><img src="antigen-logo-white.png" alt="ANTIGEN" height="36"></a>
   <ul class="nav-links">
     <li><a href="#why">Why</a></li>
     <li><a href="#what">What</a></li>
@@ -1312,71 +1400,81 @@ section{position:relative;}
     <a class="back-link" href="#home">Back to top</a>
   </div>
 
-  <h2 class="who-stack-headline reveal">
-    <span class="ghost">THE HUMAN</span>
-    <span class="solid">× AI STACK.</span>
-  </h2>
+  <h2 class="who-statement reveal">We do not have<br/>employees. We have<br/><span style="color:var(--color-yellow);">Sovereign Contributors.</span></h2>
 
-  <div class="who-grid">
-    <!-- Sovereign Humans -->
-    <div class="reveal-left">
-      <p class="who-col-header">Sovereign Humans — Curiosity, Curation, Connectivity</p>
-      <div class="who-role-cards stagger">
-        <div class="who-role-card">
-          <p class="who-role-tag">Partners · The Stewards</p>
-          <p class="who-role-name">Senior Context Holders</p>
-          <p class="who-role-desc">Manage relationships, carry reputational risk, and are accountable for outcomes. P&amp;G, Coca-Cola, WPP, DoubleVerify — global holding company pedigree. They don't brief — they deliver.</p>
-        </div>
-        <div class="who-role-card">
-          <p class="who-role-tag">Experts · The Deep Nodes</p>
-          <p class="who-role-name">Highly Specialised Practitioners</p>
-          <p class="who-role-desc">MarTech, performance, narrative, product marketing, commercial. Plugged in per engagement. No generalists. They own their IP and define the terms of their engagement.</p>
-        </div>
-        <div class="who-role-card">
-          <p class="who-role-tag">Associates · Apprentice-Explorers</p>
-          <p class="who-role-name">Early-Career Talent</p>
-          <p class="who-role-desc">Learn through exposure to real, consequential problems. AI-supported senior performance means they operate above their level from day one.</p>
-        </div>
+  <div class="stack-tabs reveal">
+    <button class="stack-tab active" data-tab="human">Human Stack</button>
+    <button class="stack-tab" data-tab="ai">AI Stack</button>
+  </div>
+
+  <div class="stack-panel" id="tab-human">
+    <div class="accordion-card">
+      <button class="acc-header">
+        <span class="acc-tag">Partners · The Stewards</span>
+        <span class="acc-name">Senior Context Holders</span>
+        <span class="acc-arrow">+</span>
+      </button>
+      <div class="acc-body">
+        <p>Owners of the client relationship. Frame the problem, hold context, bear reputational risk. No middle management. No hiding.</p>
       </div>
     </div>
-
-    <!-- Divergent Engines -->
-    <div class="reveal">
-      <p class="who-col-header">Divergent Intelligence Engines — Institutional Memory, Counterfactual Synthesis</p>
-      <div class="who-engine">
-        <div>
-          <p class="who-engine-name">The Provocateur</p>
-          <p class="who-engine-sub">Divergent Thinking</p>
-          <p class="who-engine-desc">Acts as a permanent dissenter, challenging assumptions and preventing groupthink. The contrarian voice in every room.</p>
-        </div>
-        <p class="who-engine-icon">!?</p>
+    <div class="accordion-card">
+      <button class="acc-header">
+        <span class="acc-tag">Experts · The Deep Nodes</span>
+        <span class="acc-name">Specialist Practitioners</span>
+        <span class="acc-arrow">+</span>
+      </button>
+      <div class="acc-body">
+        <p>Data ethicists, prompt architects, cultural analysts. Plugged in episodically for high-impact expertise — not billable hours.</p>
       </div>
-      <div class="who-engine">
-        <div>
-          <p class="who-engine-name">The Synthesizer</p>
-          <p class="who-engine-sub">Institutional Memory</p>
-          <p class="who-engine-desc">Uses RAG-based knowledge graphs, ensuring access to collective wisdom from day one. Knowledge that compounds instead of departing.</p>
-        </div>
-        <p class="who-engine-icon">≋</p>
-      </div>
-      <div class="who-engine">
-        <div>
-          <p class="who-engine-name">The Scaffolding</p>
-          <p class="who-engine-sub">Structured Creativity</p>
-          <p class="who-engine-desc">Interfaces that guide the creative process toward significantly more innovative outputs. Structure as a provocation engine.</p>
-        </div>
-        <p class="who-engine-icon">⌗</p>
+    </div>
+    <div class="accordion-card">
+      <button class="acc-header">
+        <span class="acc-tag">Associates · Apprentice-Explorers</span>
+        <span class="acc-name">Emerging Talent</span>
+        <span class="acc-arrow">+</span>
+      </button>
+      <div class="acc-body">
+        <p>Supported by the AI stack to perform at senior levels from day one.</p>
       </div>
     </div>
   </div>
 
-  <!-- Equation -->
-  <div class="who-equation reveal">
-    <div class="eq-part">Sovereign<br/>Humans</div>
-    <div class="eq-op">×</div>
-    <div class="eq-part">Divergent<br/>Engines</div>
-    <div class="eq-op">=</div>
-    <div class="eq-result">The Human<br/>× AI Stack.</div>
+  <div class="stack-panel hidden" id="tab-ai">
+    <div class="accordion-card">
+      <button class="acc-header">
+        <span class="acc-tag">The Synthesizer · Memory</span>
+        <span class="acc-name">Knows Everything</span>
+        <span class="acc-arrow">+</span>
+      </button>
+      <div class="acc-body">
+        <p>A RAG-based knowledge graph that remembers every insight and data point. Collective wisdom, always on. Solves brain drain.</p>
+      </div>
+    </div>
+    <div class="accordion-card">
+      <button class="acc-header">
+        <span class="acc-tag">The Provocateur · Dissent</span>
+        <span class="acc-name">Questions Everything</span>
+        <span class="acc-arrow">+</span>
+      </button>
+      <div class="acc-body">
+        <p>The permanent dissenter. Programmed to challenge consensus, identify blind spots, and simulate counterfactual futures to prevent groupthink.</p>
+      </div>
+    </div>
+    <div class="accordion-card">
+      <button class="acc-header">
+        <span class="acc-tag">The Scaffolding · Structure</span>
+        <span class="acc-name">Structures Everything</span>
+        <span class="acc-arrow">+</span>
+      </button>
+      <div class="acc-body">
+        <p>Specialized interfaces guiding human creativity. Ensures outputs meet the Antigen standard of rigorous strategy.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="who-quote reveal">
+    <p>You interact only with people who have skin in the game. No middle management. No hiding.</p>
   </div>
 </section>
 
@@ -1391,68 +1489,64 @@ section{position:relative;}
     <a class="back-link" href="#home">Back to top</a>
   </div>
 
-  <h2 class="how-headline reveal">DEPLOYMENT<br/>PROTOCOLS<br/><span style="color:var(--color-red);">ACROSS ECOSYSTEMS.</span></h2>
+  <h2 class="how-headline reveal">We structure<br/>ourselves around<br/><span style="color:var(--color-red);">the growth problem.</span></h2>
 
-  <!-- Ecosystem grid -->
-  <div class="ecosystem-grid stagger">
-    <div class="ecosystem-card">
-      <div class="eco-bar"></div>
-      <p class="eco-num">01</p>
-      <p class="eco-kicker">Agencies</p>
-      <p class="eco-title">Pitch Strategy &amp; Thought Leadership</p>
-      <p class="eco-desc">Capability building, pitch strategy, thought leadership. We sharpen your offering and harden your competitive position.</p>
+  <!-- Paradigm shift -->
+  <div class="paradigm-table reveal">
+    <div class="paradigm-col legacy">
+      <p class="paradigm-label">Legacy Agency Model</p>
+      <div class="paradigm-row">Linear, manual planning</div>
+      <div class="paradigm-row">Adding headcount to solve problems</div>
+      <div class="paradigm-row">Crippled by cognitive latency</div>
+      <div class="paradigm-row">Standard strategy documents</div>
     </div>
-    <div class="ecosystem-card">
-      <div class="eco-bar"></div>
-      <p class="eco-num">02</p>
-      <p class="eco-kicker">Brands</p>
-      <p class="eco-title">Transformation &amp; Agency Review</p>
-      <p class="eco-desc">Transformation programs, agency review, performance marketing architecture. We sit on your side of the table.</p>
+    <div class="paradigm-arrow-col">
+      <p class="paradigm-label">&nbsp;</p>
+      <div class="paradigm-arrow">→</div>
+      <div class="paradigm-arrow">→</div>
+      <div class="paradigm-arrow">→</div>
+      <div class="paradigm-arrow">→</div>
     </div>
-    <div class="ecosystem-card">
-      <div class="eco-bar"></div>
-      <p class="eco-num">03</p>
-      <p class="eco-kicker">AdTech / MarTech</p>
-      <p class="eco-title">GTM &amp; PMF Advisory</p>
-      <p class="eco-desc">GTM strategy, PMF advisory, holding company partnerships. We translate technology into commercial traction.</p>
-    </div>
-    <div class="ecosystem-card">
-      <div class="eco-bar"></div>
-      <p class="eco-num">04</p>
-      <p class="eco-kicker">Startups</p>
-      <p class="eco-title">Positioning &amp; Growth Architecture</p>
-      <p class="eco-desc">Positioning, growth architecture, fractional CMO. We build the strategic foundation before you scale.</p>
-    </div>
-    <div class="ecosystem-card">
-      <div class="eco-bar"></div>
-      <p class="eco-num">05</p>
-      <p class="eco-kicker">Cross-Sector</p>
-      <p class="eco-title">Fractional CSO &amp; Advisory Retainers</p>
-      <p class="eco-desc">For organisations that need a permanent provocation engine, not a periodic consultant. We exist inside the problem.</p>
+    <div class="paradigm-col antigen">
+      <p class="paradigm-label">ANTIGEN Protocol</p>
+      <div class="paradigm-row">Continuous, exponential processing loop</div>
+      <div class="paradigm-row">Increasing cognitive density, zero overhead</div>
+      <div class="paradigm-row">Calibrated by structured internal friction</div>
+      <div class="paradigm-row">Jury-ready strategic moats</div>
     </div>
   </div>
 
-  <!-- Service velocity -->
-  <div class="velocity-section reveal">
-    <div>
-      <p class="velocity-label">SERVICE<br/><em>VELOCITY</em><br/>ARCHITECTURE</p>
+  <!-- Ecosystem tabs -->
+  <div class="eco-tabs stagger">
+    <button class="eco-tab active" data-eco="0">Agencies</button>
+    <button class="eco-tab" data-eco="1">Brands</button>
+    <button class="eco-tab" data-eco="2">AdTech / MarTech</button>
+    <button class="eco-tab" data-eco="3">Startups</button>
+    <button class="eco-tab" data-eco="4">Cross-Sector</button>
+  </div>
+  <div class="eco-panels">
+    <div class="eco-panel active">
+      <p class="eco-panel-title">Pitch Strategy &amp; Thought Leadership</p>
+      <p class="eco-panel-desc">Sharpen your offering and harden your competitive position.</p>
     </div>
-    <div class="velocity-tiers stagger">
-      <div class="velocity-tier">
-        <span class="tier-badge">Tier 1</span>
-        <p class="tier-title">IMMEDIATE</p>
-        <p class="tier-time">Days → Weeks · Project-Based</p>
-        <p class="tier-desc">Crack a specific strategic challenge fast. Intensive engagements designed for velocity — POVs, workshops, pitch war rooms, go-to-market strategy.</p>
-        <p class="tier-ready">↑ We are ready to deliver this today.</p>
-      </div>
-      <div class="velocity-tier">
-        <span class="tier-badge yellow">Tier 2</span>
-        <p class="tier-title">MID-LONG TERM</p>
-        <p class="tier-time">Weeks → Months · Embedded</p>
-        <p class="tier-desc">Deeper integration, structural capability building, embedded transformation programs, and ongoing fractional leadership.</p>
-      </div>
+    <div class="eco-panel">
+      <p class="eco-panel-title">Transformation &amp; Agency Review</p>
+      <p class="eco-panel-desc">We sit on your side of the table.</p>
+    </div>
+    <div class="eco-panel">
+      <p class="eco-panel-title">GTM &amp; PMF Advisory</p>
+      <p class="eco-panel-desc">We translate technology into commercial traction.</p>
+    </div>
+    <div class="eco-panel">
+      <p class="eco-panel-title">Positioning &amp; Growth Architecture</p>
+      <p class="eco-panel-desc">Build the strategic foundation before you scale.</p>
+    </div>
+    <div class="eco-panel">
+      <p class="eco-panel-title">Fractional CSO &amp; Advisory Retainers</p>
+      <p class="eco-panel-desc">A permanent provocation engine, not a periodic consultant.</p>
     </div>
   </div>
+
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -1524,25 +1618,25 @@ section{position:relative;}
       <p style="font-size:var(--type-small);font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--color-yellow);margin-top:var(--space-5);">Composable. Distributed. Insurgent.</p>
     </div>
     <div class="contact-channels">
-      <a class="contact-channel" href="mailto:sid@antigen.in">
+      <a class="contact-channel" href="mailto:contact@ntgn.in">
         <div class="channel-icon">B</div>
         <div>
           <p class="channel-label">Brief Us</p>
-          <p class="channel-value">sid@antigen.in</p>
+          <p class="channel-value">sid@ntgn.in</p>
         </div>
       </a>
-      <a class="contact-channel" href="mailto:talent@antigen.in">
+      <a class="contact-channel" href="mailto:contact@ntgn.in">
         <div class="channel-icon">J</div>
         <div>
           <p class="channel-label">Join the Network</p>
-          <p class="channel-value">talent@antigen.in</p>
+          <p class="channel-value">partner@ntgn.in</p>
         </div>
       </a>
-      <a class="contact-channel" href="mailto:partners@antigen.in">
+      <a class="contact-channel" href="mailto:contact@ntgn.in">
         <div class="channel-icon">P</div>
         <div>
           <p class="channel-label">Partner With Us</p>
-          <p class="channel-value">partners@antigen.in</p>
+          <p class="channel-value">contact@ntgn.in</p>
         </div>
       </a>
     </div>
@@ -1550,7 +1644,7 @@ section{position:relative;}
 
   <div class="closing-bar">
     <p class="closing-tagline">END OF DOSSIER // COORDINATES ACTIVE</p>
-    <a class="closing-cta" href="mailto:sid@antigen.in">Bring us a hard problem →</a>
+    <a class="closing-cta" href="mailto:contact@ntgn.in">Bring us a hard problem →</a>
   </div>
 </section>
 
@@ -1565,7 +1659,7 @@ section{position:relative;}
     <li><a href="#pov">POV</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <p class="footer-meta">A First-Principles Intelligence Collective &nbsp;·&nbsp; Siliguri, India</p>
+  <p class="footer-meta">A First-Principles Intelligence Collective</p>
 </footer>
 
 <!-- ─── JS ────────────────────────────────────────────────────────── -->
@@ -1617,6 +1711,37 @@ section{position:relative;}
       el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
     });
   }
+
+  /* WHO: Stack tab switcher */
+  document.querySelectorAll('.stack-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.stack-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.stack-panel').forEach(p => p.classList.add('hidden'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.remove('hidden');
+    });
+  });
+
+  /* WHO: Accordion cards */
+  document.querySelectorAll('.acc-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.accordion-card');
+      const body = card.querySelector('.acc-body');
+      const isOpen = card.classList.contains('open');
+      card.classList.toggle('open', !isOpen);
+      body.classList.toggle('open', !isOpen);
+    });
+  });
+
+  /* HOW: Ecosystem tab switcher */
+  document.querySelectorAll('.eco-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.eco-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.eco-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelectorAll('.eco-panel')[+tab.dataset.eco].classList.add('active');
+    });
+  });
 
   /* Smooth scroll for anchor links */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
